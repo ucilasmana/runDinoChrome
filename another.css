@@ -1,0 +1,68 @@
+*{
+    /*This property allows us to include the padding and border in an element's total width and height*/
+        box-sizing: border-box;
+        user-select: none;
+        margin: 0;
+        padding: 0;
+    }
+    body{
+    /*minimal height of the body is equal to 100% of the viewport height*/
+        min-height: 100vh;
+    /*Flexbox was designed as a one-dimensional layout model and as a method that could offer space distribution between items in an interface and powerful alignment capabilities*/
+        display: flex;
+    /*align the flex items at the center of the container*/
+        justify-content: center;
+    /*center the alignments for all the items of the flexible body element*/
+        align-items: center;
+    }
+    .world
+    {
+    /*the overflow property specifies whether to clip the content or to add scrollbars when the content of an element is too big to fit in the specified area */
+    /*hidden - the overflow is clipped, and the rest of the content will be invisible*/
+        overflow: hidden;
+    /*this element is positioned relative to its normal position*/
+        position: relative
+        /*width: 100%;
+        height: 200px;*/
+        
+    }
+    .score {
+        /*this element is positioned relative to the nearest positioned ancestor (world div)*/
+        position: absolute;
+        /*vmin uses the ratio of the smallest side. 
+        That is, if the height of the browser window is less than its width, 1vmin will be equivalent to 1vh
+        If the width of the browser is less that it's height, 1 vmin is equivalent to 1vw
+        vmax is the opposite
+        1vmax is equivalent to 1vw if the viewport is wider than its tall, if the browser is taller than its wide, 1vmax will be equivalent to 1vh
+        */
+        font-size: 3vmin;
+        right: 1vmin;
+        top: 1vmin;
+    }
+    .start-screen {
+        position: absolute;
+        font-size: 5vmin;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .ground {
+        --left:0;
+        position: absolute;
+        width: 300%; /*PERCENTAGE*/
+        bottom: 0;
+        left: calc(var(--left)* 1%); /* THAT'S WHY IT HAS TO * WITH PERCENTAGE*/
+    }
+    .dino {
+        --bottom: 0;
+        position: absolute;
+        left: 1%;
+        height: 30%;
+        bottom: calc(var(--bottom) * 1%);
+    }
+    .cactus {
+        position: absolute;
+        left: calc(var(--left) * 1%);
+        height: 30%;
+        bottom: 0;
+    }
