@@ -8,7 +8,8 @@
         --start: 'Press Start 2P', sans-serif;
         --poor: 'Poor Story', sans-serif;
         --dark-blue-color:#1b223a;
-        --soil-color:#ca8e4e
+        --soil-color:#ca8e4e;
+        --layer-color:#1b223a94;
 }
 body{
     display: flex;
@@ -241,7 +242,7 @@ body{
     z-index: 999;
     width: 100%;
     height: 100%;
-    background-color: #1b223a94;
+    background-color: var(--layer-color);
     position: absolute;
     text-align: center;
 }
@@ -329,3 +330,32 @@ body{
         }
        
 }
+#countdown{
+    background: var(--layer-color);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+}
+@keyframes countdown {
+    0% { content: "3"; }
+    50% { content: "2"; }
+    100% { content: "1"; }
+  }
+  #numbers{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  #numbers::after {
+    font-family: var(--monomaniac);
+    color: #eea659;
+    content: "";
+    animation: countdown 3s steps(3) forwards;
+    font-size: 5em;
+  }

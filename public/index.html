@@ -38,7 +38,7 @@
                 <img class="base-ground" src="images/background/base-ground.png" alt="">
                 <img class="ground" id="ground" src="images/background/ground.png" alt="" data-ground>
                 <div id="track">
-                    <img id="dino" src="images/characters/dino.png" data-dino>
+                    <img id="dino" src="images/characters/dino.gif" data-dino>
                     <img id="cactus-char" class="cactus-char" src="images/characters/cactus-char.png" alt="cactus">
                </div>
             </div>
@@ -57,6 +57,22 @@
             </div>
             <button class="action" onclick="window.location.reload()">Play Again</button>
         </div>
+    </div>
+    <div id="modal">
+        <div class="content">
+            <h3 id="headerMessage"></h3>
+            <span id="message"></span>
+            <div class="scores">
+                <span id="yourScore"></span>
+                <div class="highestScore">
+                    <span>Highest Score : </span><span id="highestScore"></span>
+                </div>
+            </div>
+            <button class="action" onclick="window.location.reload()">Play Again</button>
+        </div>
+    </div>
+    <div id="countdown">
+        <div id="numbers"></div>
     </div>
       <script src="script.js" type="module"></script>
 </body>

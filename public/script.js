@@ -38,37 +38,49 @@ const messageSpan = document.getElementById("message")
 const yourScoreSpan= document.getElementById("yourScore")
 const highestScoreSpan = document.getElementById("highestScore")
 
+//COUNTDOWN
+const countdownDiv= document.getElementById("countdown")
+const numbersDiv= document.getElementById("numbers")
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-let speedScale=0.025
+let scoreScale=0.025
+let speedScale=1.2
 let scoreValue=0
 let gameInterval
+let speedInterval
 let highestScoreValue;
 
 const scoreDocRef = doc(db, 'score', 'score');
 getDoc(scoreDocRef).then((docSnapshot) => {
 if (docSnapshot.exists()) {
     highestScoreValue = docSnapshot.data().highestScore;
-  //  console.log("Highest score: ", highestScoreValue);
 } else {
     console.log("No data found at 'score' document.");
 }
 });
 
+document.addEventListener("keydown", countdown, {once:true});
+document.addEventListener("touchstart", countdown, {once:true});
 
 
-document.addEventListener("keydown", handleStart, {once:true});
-document.addEventListener("touchstart", handleStart, {once:true});
-
+function countdown(){
+    startScreenSpan.style.setProperty("display", "none")
+    countdownDiv.style.setProperty("display", "block")
+    setTimeout( () =>{
+        countdownDiv.style.setProperty("display", "none")
+        handleStart()
+    }, 3000);
+   
+}
 
 function handleStart() { 
-
-    startScreenSpan.style.setProperty("display", "none")
+    console.log("start")
+   
     scoreSpan.style.setProperty("display", "block")
-    
 
     //Cactus Bg Animation
     cactusBgDiv.style.setProperty("display", "block")
@@ -81,7 +93,8 @@ function handleStart() {
     trackDiv.style.setProperty("display", "block")
 
     gameInterval=setInterval(handleGame, 10);
-    
+    speedInterval=setInterval(handleSpeed, 1500);
+
     document.addEventListener("keydown", function (event) {
         jump();     
     });
@@ -91,7 +104,7 @@ function handleStart() {
 }
 
 function handleGame(){
-    scoreValue = scoreValue+speedScale
+    scoreValue = scoreValue+scoreScale
     scoreSpan.innerHTML=Math.round(scoreValue)
 
     let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
@@ -104,10 +117,18 @@ function handleGame(){
         }
         ground.style.animationPlayState = "paused";
         dino.style.animationPlayState = "paused";
+        dino.setAttribute('src', 'images/characters/dinoLose.png');
+        
         cactusChar.style.animationPlayState = "paused";
         showModal()
     }
+}
 
+function handleSpeed(){
+    speedScale -= 0.0075;
+    cactusChar.style.setProperty("animation", "cactus-block "+speedScale+"s infinite linear")
+    ground.style.setProperty("animation", "ground "+speedScale+"s infinite linear")
+    console.log( cactusChar.style.animation)
 }
 
 function jump() {
@@ -123,8 +144,10 @@ function jump() {
 
 function showModal(){
     clearInterval(gameInterval)
+    clearInterval(speedInterval)
+
     highestScoreSpan.innerHTML=highestScoreValue
-    modal.style.setProperty("display", "block")
+    modalDiv.style.setProperty("display", "block")
     if(scoreValue>highestScoreValue)
     {   
         setDoc(scoreDocRef, { highestScore: Math.round(scoreValue) });
