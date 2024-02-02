@@ -47,7 +47,7 @@ const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-let scoreScale=0.025
+let scoreScale=0.03
 let speedScale=1.2
 let scoreValue=0
 let gameInterval
@@ -125,7 +125,7 @@ function handleGame(){
 }
 
 function handleSpeed(){
-    speedScale -= 0.0075;
+    speedScale -= 0.004;
     cactusChar.style.setProperty("animation", "cactus-block "+speedScale+"s infinite linear")
     ground.style.setProperty("animation", "ground "+speedScale+"s infinite linear")
     console.log( cactusChar.style.animation)
