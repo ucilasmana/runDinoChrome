@@ -125,7 +125,7 @@ function handleGame(){
 }
 
 function handleSpeed(){
-    speedScale -= 0.0035;
+    speedScale -= 0.0025;
     cactusChar.style.setProperty("animation", "cactus-block "+speedScale+"s infinite linear")
     ground.style.setProperty("animation", "ground "+speedScale+"s infinite linear")
 }
